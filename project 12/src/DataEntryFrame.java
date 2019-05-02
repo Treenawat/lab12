@@ -166,7 +166,8 @@ public class DataEntryFrame extends JFrame
 			public void mouseDragged(MouseEvent e)
 			{
 				// TODO: add a point to the panel on drag and repaint.
-				
+				spanel.addPoint(e.getPoint());
+				repaint();
 			}
 		});
 		this.add(signatureInfo);
