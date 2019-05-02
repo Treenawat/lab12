@@ -194,6 +194,14 @@ public class DataEntryFrame extends JFrame
 
 			// TODO: use the JTextFields and the signature panel to set the values
 			// of the selected FormData object.
+			if(datalist.get(select).setValues(lastName.getText(), middleInitial.getText().toCharArray()[0], 
+					firstName.getText(), displayName.getText(), SSN.getText(), 
+					phone.getText(), email.getText(), address.getText(), spanel.getSignature())){
+				errorField.setText("Form information updated!");
+			}
+			else{
+				errorField.setText("Form information failed to update.");
+			}
 
 			this.setVisuals(datalist.get(select));
 			DefaultComboBoxModel<String> newComboBoxModel = getComboBoxModel(datalist);
@@ -207,6 +215,8 @@ public class DataEntryFrame extends JFrame
 		resetForm.addActionListener((e) -> {
 			int select = formSelect.getSelectedIndex();
 			// TODO: reset the values on the selected form data
+			FormData resetAnswer = datalist.get(select);
+			resetAnswer.reset();
 			this.setVisuals(datalist.get(select));
 		});
 
