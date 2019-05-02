@@ -134,7 +134,7 @@ public class DataEntryFrame extends JFrame
 		this.add(formSelect);
 
 		// TODO: add in all form-fillable components:
-		JPanel formFill = new JPanel(/* TODO: add layout manager */);
+		JPanel formFill = new JPanel(new GridLayout(8,2));
 		// TODO: add to panel...
 		this.add(formFill);
 
