@@ -249,8 +249,8 @@ public class DataEntryFrame extends JFrame
 			//		 list of formdata.
 			// TODO: display error message on fail, else display success message
 			 JFileChooser chooser = new JFileChooser();
-			 int returnVal = chooser.showOpenDialog(this);
-			 if(returnVal == JFileChooser.APPROVE_OPTION) {
+			 int returnValue = chooser.showOpenDialog(this);
+			 if(returnValue == JFileChooser.APPROVE_OPTION) {
 				 String file = chooser.getSelectedFile().getName();
 				 try{
 					 FileInputStream FIS = new FileInputStream(file);
@@ -289,8 +289,8 @@ public class DataEntryFrame extends JFrame
 			// TODO: export datalist from a file (hint, use file.getAbsolutePath()):
 			// TODO: display error message on fail, else display success message
 			JFileChooser chooser = new JFileChooser();
-			int returnVal = chooser.showOpenDialog(this);
-			if(returnVal == JFileChooser.APPROVE_OPTION) {
+			int returnValue = chooser.showOpenDialog(this);
+			if(returnValue == JFileChooser.APPROVE_OPTION) {
 				String file = chooser.getSelectedFile().getName();
 				try{
 					FileOutputStream FOS = new FileOutputStream(file);
