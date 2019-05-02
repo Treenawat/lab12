@@ -2,12 +2,17 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -221,10 +226,15 @@ public class DataEntryFrame extends JFrame
 		});
 
 		// TODO: add buttons to panel and add to frame
-
+		formHandling.add(createForm);
+		formHandling.add(saveForm);
+		formHandling.add(resetForm);
+		this.add(formHandling);
+		
 		// Add in the error message field:
 		this.errorField.setEditable(false);
 		// TODO: add error field to frame
+		this.add(errorField);
 
 		// Add in the import/export panel:
 		JButton importButton = new JButton("Import");
@@ -238,7 +248,31 @@ public class DataEntryFrame extends JFrame
 			//		 You will use the file to replace the datalist object. I.e. you will be loading in a new
 			//		 list of formdata.
 			// TODO: display error message on fail, else display success message
-
+			 JFileChooser chooser = new JFileChooser();
+			 int returnVal = chooser.showOpenDialog(this);
+			 if(returnVal == JFileChooser.APPROVE_OPTION) {
+				 String file = chooser.getSelectedFile().getName();
+				 try{
+					 FileInputStream FIS = new FileInputStream(file);
+					 ObjectInputStream OIS = new ObjectInputStream(FIS);
+					 
+					 datalist = (ArrayList<FormData>)OIS.readObject();
+					 OIS.close();
+					 FIS.close();
+					 errorField.setText("Successfully imported Data.");
+				 }
+				 catch(Exception exc){
+					 exc.printStackTrace();
+					 errorField.setText("Failed to import Data.");
+				 }
+			 }
+			
+            int select = 0;
+			DefaultComboBoxModel<String> newComboBoxModel = getComboBoxModel(datalist);
+			formSelect.setModel(newComboBoxModel);
+			formSelect.setSelectedIndex(select);
+			this.setVisuals(datalist.get(select));
+			
         	// Use this code snippet to reset visuals after importing:
 			/*
             int select = 0;
@@ -254,10 +288,32 @@ public class DataEntryFrame extends JFrame
 			// TODO: Choose a file (hint, use JFileChooser):
 			// TODO: export datalist from a file (hint, use file.getAbsolutePath()):
 			// TODO: display error message on fail, else display success message
+			JFileChooser chooser = new JFileChooser();
+			int returnVal = chooser.showOpenDialog(this);
+			if(returnVal == JFileChooser.APPROVE_OPTION) {
+				String file = chooser.getSelectedFile().getName();
+				try{
+					FileOutputStream FOS = new FileOutputStream(file);
+					ObjectOutputStream OOS = new ObjectOutputStream(FOS);
+					 
+					OOS.writeObject(datalist);
+					OOS.close();
+					FOS.close();
+					errorField.setText("Seccessfully exported Data.");
+				}
+				catch(Exception exc){
+					exc.printStackTrace();
+					errorField.setText("Failed to export Data.");
+				}
+			}
 		});
 
 		// TODO: add import/export to panel and add to frame
-
+		JPanel lastRow = new JPanel(new GridLayout(1, 2));
+		lastRow.add(importButton);
+		lastRow.add(exportButton);
+		this.add(lastRow);
+		
 		// JFrame basics:
 		this.setTitle("Example Form Fillout");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
