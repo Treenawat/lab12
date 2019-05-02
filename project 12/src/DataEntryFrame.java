@@ -137,6 +137,24 @@ public class DataEntryFrame extends JFrame
 		JPanel formFill = new JPanel(new GridLayout(8,2));
 		// TODO: add to panel...
 		this.add(formFill);
+		formFill.add(firstNameInfo);
+		formFill.add(firstName);
+		formFill.add(midddleInitialInfo);
+		formFill.add(middleInitial);
+		formFill.add(lastNameInfo);
+		formFill.add(lastName);
+		formFill.add(displayNameInfo);
+		formFill.add(displayName);
+		formFill.add(SSNInfo);
+		formFill.add(SSN);
+		formFill.add(phoneInfo);
+		formFill.add(phone);
+		formFill.add(emailInfo);
+		formFill.add(email);
+		formFill.add(addressInfo);
+		formFill.add(address);
+		formFill.add(signatureInfo);
+		formFill.add(spanel);
 
 		// Add in the signature panel:
 		spanel.addMouseMotionListener(new MouseMotionListener()
@@ -148,6 +166,7 @@ public class DataEntryFrame extends JFrame
 			public void mouseDragged(MouseEvent e)
 			{
 				// TODO: add a point to the panel on drag and repaint.
+				
 			}
 		});
 		this.add(signatureInfo);
