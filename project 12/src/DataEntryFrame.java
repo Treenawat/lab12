@@ -299,7 +299,7 @@ public class DataEntryFrame extends JFrame
 					OOS.writeObject(datalist);
 					OOS.close();
 					FOS.close();
-					errorField.setText("Seccessfully exported Data.");
+					errorField.setText("Successfully exported Data.");
 				}
 				catch(Exception exc){
 					exc.printStackTrace();
